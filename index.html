@@ -13,11 +13,15 @@
     <div class="flex">
         <div class="controls">
             <h3>Options</h3>
-            <form>
+            <div>
                 <label for="size">Canvas Size (px): </label>
-                <input type="number" name="size" id="size" min="1" max="900" step="1" value="16"/>
+                <input type="number" id="size" min="1" max="900" step="1" value="16">
                 <button type="button" id="resize">Resize</button>
-            </form>
+            </div>
+            <div>
+                <label for="toggle_grid">Toggle Grid </label>
+                <input type="checkbox" id="toggle_grid" checked="false">
+            </div>
         </div>
     </div>
 </body>

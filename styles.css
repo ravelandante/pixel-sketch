@@ -4,3 +4,7 @@
     display: flex;
     justify-content: center;
 }
+
+#size   {
+    width: 50px;
+}

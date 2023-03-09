@@ -1,4 +1,5 @@
-
+let grid_items;
+let grid_item_size;
 
 function createGrid(grid_dims, grid_size)   {
     const old_grid = document.querySelector(".grid-container");
@@ -8,10 +9,11 @@ function createGrid(grid_dims, grid_size)   {
 
     const grid = document.createElement("div");
 
-    let grid_items = Math.sqrt(grid_size);
-    let grid_item_size = grid_dims/grid_items;
+    grid_items = Math.sqrt(grid_size);
+    grid_item_size = grid_dims/grid_items;
     grid.classList.add("grid-container");
-    grid.style.cssText = `display: grid; grid-template-columns: repeat(${grid_items}, ${grid_item_size}px); grid-template-rows: repeat(${grid_items}, ${grid_item_size}px); margin: auto;`
+    grid.style.cssText = `display: grid; grid-template-columns: repeat(${grid_items}, ${grid_item_size}px); grid-template-rows: repeat(${grid_items}, ${grid_item_size}px); margin: auto;
+                            border: ${grid_item_size/100}px solid;`
 
     document.querySelector(".flex").appendChild(grid);
 
@@ -31,14 +33,29 @@ function createGrid(grid_dims, grid_size)   {
 
 function resizeCanvas() {
     const size = document.querySelector("#size").value;
-    let grid_min = Math.min(window.innerHeight, window.innerWidth);
-    createGrid(grid_min, size);
+    let grid_min = Math.min(window.innerHeight*0.9, window.innerWidth*0.9);
+    createGrid(grid_min*0.9, size);
+}
+
+function toggleGrid()   {
+    let width = 0;
+    const grid_items = document.querySelector(".grid-container").children;
+    if (grid_items[0].style.border == "0px solid")
+        width = grid_item_size;
+    Array.from(grid_items).forEach(div => {
+        div.style.border = `${width/100}px solid`;
+    });
 }
 
 resizeCanvas();
 
 const resize = document.querySelector("#resize");
+const toggle_grid = document.querySelector("#toggle_grid");
 
 resize.addEventListener("click", () => {
     resizeCanvas();
+});
+
+toggle_grid.addEventListener("change", () => {
+    toggleGrid();
 });
