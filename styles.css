@@ -56,3 +56,10 @@ button:active {
     background-color: #000000;
     color: #FFFFFF;
 }
+
+.canvas {
+    border: #000000 1px solid;
+    padding: 8px;
+    left: 20px;
+    position:relative;
+}
