@@ -13,7 +13,7 @@ function createGrid(grid_dims, grid_size)   {
     grid_item_size = grid_dims/grid_items;
     grid.classList.add("grid-container");
     grid.style.cssText = `display: grid; grid-template-columns: repeat(${grid_items}, ${grid_item_size}px); grid-template-rows: repeat(${grid_items}, ${grid_item_size}px); margin: auto;
-                            border: ${grid_item_size/100}px solid;`
+                            border: ${grid_item_size/100}px solid; box-shadow: 7px 7px;`
 
     document.querySelector(".flex").appendChild(grid);
 
