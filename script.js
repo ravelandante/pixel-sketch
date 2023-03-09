@@ -14,7 +14,7 @@ let current_colour = "#000000";
 
 resize.onchange = () => resizeCanvas();
 toggle_grid.onclick = () => toggleGrid();
-picker.onchange = () => current_colour = picker.value;
+//picker.onchange = () => current_colour = picker.value;
 single.onclick = () => {
     current_mode.classList.remove("enabled");
     current_mode = single;
@@ -64,10 +64,10 @@ function changeColor(e)  {
     if (e.type === 'mouseover' && !mouseDown)
         return;
     if (current_mode == single)
-        current_colour = current_colour;
-    else if (current_mode == rainbow)   {
-        const R = Math.floor(Math.random() * 256);
-        const G = Math.floor(Math.random() * 256);
+        current_colour = picker.value;
+        else if (current_mode == rainbow)   {
+            const R = Math.floor(Math.random() * 256);
+            const G = Math.floor(Math.random() * 256);
         const B = Math.floor(Math.random() * 256);
         current_colour = `rgb(${R}, ${G}, ${B})`;
     }
