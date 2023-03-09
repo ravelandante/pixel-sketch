@@ -1,11 +1,21 @@
 let grid_items;
 let grid_item_size;
 
+const resize = document.querySelector("#resize");
+const toggle_grid = document.querySelector("#toggle_grid");
+const reset = document.querySelector("#reset");
+
+resize.onclick = () => resizeCanvas();
+reset.onclick = () => resetCanvas();
+toggle_grid.onclick = () => toggleGrid();
+
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
+
 function createGrid(grid_dims, grid_size)   {
-    const old_grid = document.querySelector(".grid-container");
-    if (old_grid)   {
-        old_grid.remove();
-    }
+    if (document.querySelector(".grid-container"))          
+        document.querySelector(".grid-container").remove();
 
     const grid = document.createElement("div");
 
@@ -18,17 +28,24 @@ function createGrid(grid_dims, grid_size)   {
     document.querySelector(".flex").appendChild(grid);
 
     for (let i = 0; i < grid_size; i++)    {
-        const div = document.createElement("div");
-        div.classList.add("grid-item");
-        div.style.cssText = `background-color: white; border: ${grid_item_size/100}px solid;`;
-        div.addEventListener("mouseover", () => {
-            if (div.style.backgroundColor == "white")
-                div.style.backgroundColor = "black";
-            else
-                div.style.backgroundColor = "white";
-        });
-        grid.appendChild(div);
+        const grid_item = document.createElement("div");
+        grid_item.classList.add("grid-item");
+        grid_item.style.cssText = `background-color: white; border: ${grid_item_size/100}px solid;`;
+        grid_item.addEventListener('mouseover', changeColor);
+        grid_item.addEventListener('mousedown', changeColor);
+        grid.appendChild(grid_item);
     }
+}
+
+function changeColor(e)  {
+    if (e.type === 'mouseover' && !mouseDown)
+        return;
+    if (e.target.style.backgroundColor == "white")  {
+        const s = document.querySelector(".grid-item");
+        e.target.style.backgroundColor = "black";
+    }
+    else
+        e.target.style.backgroundColor == "white";
 }
 
 function resizeCanvas() {
@@ -47,15 +64,14 @@ function toggleGrid()   {
     });
 }
 
-resizeCanvas();
+function resetCanvas()  {
+    let colour = "white";
+    const grid_items = document.querySelector(".grid-container").children;
+    Array.from(grid_items).forEach(div => {
+        div.style.backgroundColor = colour;
+    });
+}
 
-const resize = document.querySelector("#resize");
-const toggle_grid = document.querySelector("#toggle_grid");
-
-resize.addEventListener("click", () => {
+window.onload = () => {
     resizeCanvas();
-});
-
-toggle_grid.addEventListener("change", () => {
-    toggleGrid();
-});
+}
