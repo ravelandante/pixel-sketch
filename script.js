@@ -1,13 +1,34 @@
 let grid_items;
 let grid_item_size;
 
-const resize = document.querySelector("#resize");
+const resize = document.querySelector("#size");
 const toggle_grid = document.querySelector("#toggle_grid");
+const single = document.querySelector("#single");
+const rainbow = document.querySelector("#rainbow");
+const eraser = document.querySelector("#eraser");
 const reset = document.querySelector("#reset");
 
-resize.onclick = () => resizeCanvas();
-reset.onclick = () => resetCanvas();
+let current_mode = single;
+let current_colour = "#000000";
+
+resize.onchange = () => resizeCanvas();
 toggle_grid.onclick = () => toggleGrid();
+single.onclick = () => {
+    current_mode.classList.remove("enabled");
+    current_mode = single;
+    single.classList.add("enabled");
+};
+rainbow.onclick = () => {
+    current_mode.classList.remove("enabled");
+    current_mode = rainbow;
+    rainbow.classList.add("enabled");
+};
+eraser.onclick = () => {
+    current_mode.classList.remove("enabled");
+    current_mode = eraser;
+    eraser.classList.add("enabled");
+};
+reset.onclick = () => resetCanvas();
 
 let mouseDown = false
 document.body.onmousedown = () => (mouseDown = true);
@@ -40,12 +61,17 @@ function createGrid(grid_dims, grid_size)   {
 function changeColor(e)  {
     if (e.type === 'mouseover' && !mouseDown)
         return;
-    if (e.target.style.backgroundColor == "white")  {
-        const s = document.querySelector(".grid-item");
-        e.target.style.backgroundColor = "black";
+    if (current_mode == single)
+        current_colour = "black";
+    else if (current_mode == rainbow)   {
+        const R = Math.floor(Math.random() * 256);
+        const G = Math.floor(Math.random() * 256);
+        const B = Math.floor(Math.random() * 256);
+        current_colour = `rgb(${R}, ${G}, ${B})`;
     }
-    else
-        e.target.style.backgroundColor == "white";
+    else if (current_mode == eraser)
+        current_colour = "white";
+    e.target.style.backgroundColor = current_colour;
 }
 
 function resizeCanvas() {

@@ -8,7 +8,7 @@
     <script src="script.js" defer></script>
     <title>Pixel Sketch</title>
 </head>
-<body>
+<body oncontextmenu="return false;" ondragstart="return false;" ondrop="return false;">
     <h1>Pixel Sketch</h1>
     <div class="flex" id="flex-grid">
         <div class="controls">
@@ -16,14 +16,14 @@
             <div>
                 <label for="size">Canvas Size (px): </label>
                 <input type="number" id="size" min="1" max="900" step="1" value="16">
-                <button type="button" id="resize">Resize</button>
             </div>
             <div>
-                <label for="toggle_grid">Toggle Grid </label>
-                <input type="checkbox" id="toggle_grid" checked="false">
+                <label for="toggle_grid">Enable Grid </label>
+                <input type="checkbox" id="toggle_grid" checked="true">
             </div>
-            <button class="modes">Single Color</button>
-            <button class="modes">Rainbow</button>
+            <button class="modes enabled" id="single">Single Color</button>
+            <button class="modes" id="rainbow">Rainbow</button>
+            <button class="modes" id="eraser">Eraser</button>
             <button class="modes" id="reset">Reset Canvas</button>
         </div>
     </div>

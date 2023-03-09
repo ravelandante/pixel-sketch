@@ -19,6 +19,7 @@
 
 button  {
     background-color: #FFFFFF;
+    color: #000000;
     border: 1px solid #222222;
     box-sizing: border-box;
     color: #222222;
@@ -49,4 +50,9 @@ button:hover {
 button:active {
     background-color: #F7F7F7;
     transform: scale(.98);
+}
+
+.enabled    {
+    background-color: #000000;
+    color: #FFFFFF;
 }
