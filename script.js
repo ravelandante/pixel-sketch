@@ -65,7 +65,7 @@ function createGrid(grid_dims, grid_size) {
 function resizeCanvas() {
   const size = document.querySelector("#size").value;
   const grid_min = Math.min(window.innerHeight * 0.9, window.innerWidth * 0.9);
-  createGrid(grid_min * 0.9, size);
+  createGrid(grid_min * 0.9, size * size);
 }
 
 function toggleGrid() {
